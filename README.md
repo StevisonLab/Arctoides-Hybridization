@@ -20,6 +20,8 @@ This project is based on whole genome sequencing of 10 samples across five speci
 
 ## Genome Analysis Pipeline
 
+See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/Genome%20Analysis%20Pipeline.md).
+
 ## Hybridization Analysis
 
 ## Twisst Analysis
