@@ -24,6 +24,7 @@ See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/bl
 
 ## Combination of final callset with Baboon Reference Genome
 
+See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/Baboon%20Reference%20Genome%20Add%20On.md).
 
 ## Hybridization Analysis
 
