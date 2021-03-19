@@ -301,6 +301,3 @@ bcftools merge ${species_list[0]}.chr${i}.combined.vcf.gz ${species_list[1]}.chr
 bgzip -f Macaque_merged.chr${i}.filtered.vcf
 tabix -f -p vcf Macaque_merged.chr${i}.filtered.vcf.gz
 ```
-
-Note: These final filtered VCF files for each chromosome can be found in the folder final_filtered_VCFs. 
-
