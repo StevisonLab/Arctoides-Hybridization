@@ -49,7 +49,7 @@ python ${path}/ABBABABAwindows.py -g geno_files/Macaque_merged.chr${i}.geno.gz -
 done
 ```
 
-3. The csv outputs were combined into a single output for each scale across all chromosomes. This combined output was then used to plot the resulting values in a heatmat across the genome using the template R script "plot_heatmap_FINAL.r". The resulting image is in the main text as Figure 2 for the 50,000 bp or 50kb scale. Additional scale plots are found in the supplement.
+3. The csv outputs were combined into a single output for each scale across all chromosomes. This combined output was then used to plot the resulting values in a heatmat across the genome using the template R script "plot_heatmap_new.r" (see scripts folder). The resulting image is in the main text as Figure 2 for the 50,000 bp or 50kb scale. Additional scale plots are found in the supplement.
 
 Code used was as follows:
 
@@ -62,7 +62,7 @@ echo Now running bin sizes $kb kb
    
     cat Macaque_merged.chr1.output.${kb}kb.csv >combined.${kb}kb.txt
     for i in {2..20} 'X'; do awk 'NR>1' Macaque_merged.chr$i.output.${kb}kb.csv >>combined.${kb}kb.txt; done
-    sed -e "s/50kb/${kb}kb/g" plot_heatmap_FINAL.r >plot_heatmap.${kb}kb.r
+    sed -e "s/50kb/${kb}kb/g" plot_heatmap_new.r >plot_heatmap.${kb}kb.r
 
     echo "#!/bin/sh                                                               
 echo Now making ${kb} plot...
