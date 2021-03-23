@@ -1,3 +1,4 @@
+# Hybridization Analysis
 This file details the steps used to calculate D and fdm on the macaque genome data. For the most part, the following github repo was used heavily: https://github.com/simonhmartin/genomics_general
 
 1. Using the python script from Simon Martin, the VCF file was first converted to a "geno" formatted file. This was done per chromosome.
