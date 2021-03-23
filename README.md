@@ -28,6 +28,8 @@ See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/bl
 
 ## Hybridization Analysis
 
+See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/Hybridization_Analysis.md).
+
 ## Twisst Analysis
 
 ## Genetic Differentiation Analysis
