@@ -36,6 +36,7 @@ awk '$5!~"-" && $6!~"-"' chr${i}.reduced.tmp | cat vcf_header.txt - >chr${i}.rhe
 Text of vcf-like header file is:
 
 >##fileformat=VCFv4.0
+
 >#CHROM  POS     ID      rheMac8 papAnu4 QUAL    FILTER  INFO
 
 4. Resulting baboon VCF file aligned to the rheMac8 reference was intersected with the final filtered vcf from the genome analysis pipeline (see Step #12). This was done using a custom perl script (see scripts folder: "intersect_parsed_vcf_baboon_data.pl"), which read in the baboon VCF-like file and the merged and filtered data from the macaque samples and matched up each line of the VCF files to output an intersected file with an additional column with baboon reference site coded as a genotype (e.g. alleles matching rheMac8 were coded as 0/0 and alleles not matching were coded as 1/1). Before coding alternate alleles, the value in the alternate allele column of the macaque VCF was compared against the baboon reference site. If they were the same, the same coding was used. Otherwise, it was coded as a new alternative allele matching VCF allele coding conventions.
