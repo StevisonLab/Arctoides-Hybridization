@@ -2,6 +2,10 @@
 
 This file details the steps in genome analysis of raw reads. 
 
+A visual overview of the pipeline is shown below:
+
+![](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/GenomeAnalysisWorkflow.png)
+
 1. Public samples were downloaded from NCBI via the tool `sratoolkit` version 2.8.1 of the Alabama Super Computer. For each sample, the raw sra run table was downloaded from ncbi sra website. This was used to generate a list of each sra that would be downloaded via the command line.
 
 Code used was as follows:
