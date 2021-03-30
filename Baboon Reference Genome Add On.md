@@ -1,7 +1,7 @@
 # Baboon Reference Genome
 This file details the steps to combine the final VCFs with the baboon reference genome.
 
-1. The reference genome file of each individual chromosome from the rheMac8 genome was aligned against the papAnu4 reference genome which was downloaded from UCSC in the same way as the rheMac8 reference genome using the software lastz.
+1. The reference genome file of each individual chromosome from the rheMac8 genome was aligned against the papAnu4 reference genome which was downloaded from UCSC in the same way as the rheMac8 reference genome. The two way genome alignment used the software lastz.
 
 Code used was as follows:
 
