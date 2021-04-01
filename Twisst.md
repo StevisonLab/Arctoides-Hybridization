@@ -16,4 +16,34 @@ perl spruce_trees.pl pop_list.txt geno_files/Macaque_merged.chr${i}.geno
 
 The python script "phyml_sliding_windows.py" from the Twisst repository linked above was used to convert the geno formatted data into newick formatted files.
 
-3. 
+Code used was as follows:
+
+```sh
+python ${path}/phyml_sliding_windows.py -g geno_files/Macaque_merged.chr${i}.geno.spruced --prefix tree_files/chr${i} -w 50 --windType sites --model GTR --optimise n
+```
+
+3. Run Twisst to output topology weights. 
+
+Code used was as follows:
+
+```sh
+python ${path}/twisst.py -t tree_files/chr${i}.trees -w tree_files/chr${i}.output.weights.csv -g A -g B -g C -g D --method complete --groupsFile ${path}/sample_ids.txt --outputTopos tree_files/chr${i}.toplogies.trees
+```
+
+4. Merge tree files from separate chromosomes. The scripts above were run individually on each chromosome. The following code was used to merge the genome into a single file for downstream analysis.
+
+Code used was as follows:
+
+```sh
+awk 'NR>3' chr1.output.weights.csv > merged.output.weights.tsv
+for i in {2..20} 'X'; do awk 'NR>4' chr${i}.output.weights.csv;done >> merged.output.weights.tsv
+
+cat chr1.data.tsv > merged.data.tsv
+for i in {2..20} 'X'; do awk 'NR>1' chr${i}.data.tsv;done >> merged.data.tsv
+
+wc -l merged.data.tsv merged.output.weights.tsv
+
+paste merged.data.tsv merged.output.weights.tsv >merged.twisst_final.tsv
+```
+
+5. Assign top topology based on weights. In various sections of the manuscript, rather than using the raw topology weights, we only applied a topology label if the weight was greater than 50%, 2/3 majority or 100%. This was done using a custom script "top_topos.pl" (see scripts folder). This script was hard coded to the output from step #4. To adjust weight percentage required for the labels to be applied, the variable $cutoff was used in the script. If it is set at 1, it corresponds to 100% weights must be in a specific topology for the label to be applied.  
