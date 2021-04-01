@@ -32,6 +32,8 @@ See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/bl
 
 ## Twisst Analysis
 
+See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/Twisst.md).
+
 ## Genetic Differentiation Analysis
 
 ## Candidate Loci for genital development and known mutants
