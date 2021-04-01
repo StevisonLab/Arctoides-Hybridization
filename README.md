@@ -36,4 +36,6 @@ See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/bl
 
 ## Genetic Differentiation Analysis
 
+See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/Genetic%20Differentiation.md).
+
 ## Candidate Loci for genital development and known mutants
