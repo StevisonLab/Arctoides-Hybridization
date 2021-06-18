@@ -305,3 +305,5 @@ bcftools merge ${species_list[0]}.chr${i}.combined.vcf.gz ${species_list[1]}.chr
 bgzip -f Macaque_merged.chr${i}.filtered.vcf
 tabix -f -p vcf Macaque_merged.chr${i}.filtered.vcf.gz
 ```
+
+These final filtered VCF files have been uploaded to the Auburn University institutional respository [AUrora](https://aurora.auburn.edu/). 
