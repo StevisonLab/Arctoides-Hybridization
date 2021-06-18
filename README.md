@@ -16,8 +16,8 @@ This project is based on whole genome sequencing of 13 samples across eight spec
 | BGI-96346 | _M. mulatta_ |  fascicularis | 4 |SRS114988|   M
 | A20 | _M. assamensis_ | sinica | 13 | SRS6491954 | F
 | XH1 | _M. assamensis_ | sinica | 49 | SRR2981114 | M
-| Tibetan-macaque-NO.3 | _M. thibetana_ | sinica | 27 | SRR1024051 | F
-| PM664 | _M. nemestrina_ | silenus | | SRR5947292 | 40 | M 
+| Tibetan-macaque-NO.3 | _M. thibetana_ | sinica | 27 | SRR1024051| F
+| PM664 | _M. nemestrina_ | silenus | 40 | SRR5947292 | M 
 | PF660 | _M. nigra_ | silenus | SRR5947294 | 39 | F
 | PM592 | _M. tonkeana_ | silenus | SRR5947293 | 38 | M
 
