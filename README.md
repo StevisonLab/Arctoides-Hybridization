@@ -3,7 +3,7 @@ This repository details methods and data for the corresponding manuscript detail
 
 ## Samples:
 
-This project is based on whole genome sequencing of 10 samples across five species of macaques. Two were sequenced as part of this project and raw fastq data for eight additional samples were downloaded from NCBI. Raw read data from two sequenced samples have been deposited in NCBI sequence read archive (PRJNA622565). All samples were processed together through a single genome analysis pipeline.
+This project is based on whole genome sequencing of 13 samples across eight species of macaques. Two were sequenced as part of this project and raw fastq data for eleven additional samples were downloaded from NCBI. Raw read data from two sequenced samples have been deposited in NCBI sequence read archive (PRJNA622565). All samples were processed together through a single genome analysis pipeline.
 
 | ID | species | species group | Coverage | NCBI Accession | Sex |
 | -- | -- | -- | -- | -- | -- |
@@ -17,6 +17,10 @@ This project is based on whole genome sequencing of 10 samples across five speci
 | A20 | _M. assamensis_ | sinica | 13 | SRS6491954 | F
 | XH1 | _M. assamensis_ | sinica | 49 | SRR2981114 | M
 | Tibetan-macaque-NO.3 | _M. thibetana_ | sinica | 27 | SRR1024051 | F
+| PM664 | _M. nemestrina_ | silenus | | SRR5947292 | 40 | M 
+| PF660 | _M. nigra_ | silenus | SRR5947294 | 39 | F
+| PM592 | _M. tonkeana_ | silenus | SRR5947293 | 38 | M
+
 
 ## Genome Analysis Pipeline
 
