@@ -1,6 +1,9 @@
 # Arctoides-Hybridization
 This repository details methods and data for the corresponding manuscript detailing hybridization in the _M. arctoides_ genome and the role of hybridization in traits related to genital morphology. 
 
+A snapshot of the pre-release of this repository can be found on Zenodo. Please cite this DOI, the [associated pre-print](https://www.biorxiv.org/content/10.1101/2020.05.18.102251).
+[![DOI](https://zenodo.org/badge/349222702.svg)](https://zenodo.org/badge/latestdoi/349222702)
+
 ## Samples:
 
 This project is based on whole genome sequencing of 13 samples across eight species of macaques. Two were sequenced as part of this project and raw fastq data for eleven additional samples were downloaded from NCBI. Raw read data from two sequenced samples have been deposited in NCBI sequence read archive (PRJNA622565). All samples were processed together through a single genome analysis pipeline.
