@@ -306,4 +306,4 @@ bgzip -f Macaque_merged.chr${i}.filtered.vcf
 tabix -f -p vcf Macaque_merged.chr${i}.filtered.vcf.gz
 ```
 
-These final filtered VCF files have been uploaded to the Auburn University institutional respository [AUrora](https://aurora.auburn.edu/) at the following [DOI] (http://dx.doi.org/10.35099/aurora-67). Any use of these files should cite this github repository, the Aurora DOI and our [BioRxiv preprint](https://www.biorxiv.org/content/10.1101/2020.05.18.102251v1.abstract) describing these data.  
+These final filtered VCF files have been uploaded to the Auburn University institutional respository [AUrora](https://aurora.auburn.edu/) at the following [DOI](http://dx.doi.org/10.35099/aurora-67). Any use of these files should cite this github repository, the Aurora DOI and our [BioRxiv preprint](https://www.biorxiv.org/content/10.1101/2020.05.18.102251v1.abstract) describing these data.  
