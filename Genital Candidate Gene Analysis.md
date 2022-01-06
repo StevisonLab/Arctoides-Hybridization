@@ -52,8 +52,6 @@ keep=c("ensGeneID","scaffold","start.x","end.x","sites","pi_Arctoides.x","pi_Sin
        "D","fd","fdM","geneID.x","orientation","GC_class","RecRate","Arc-dNdS","Sin-dNdS","Fas-dNdS")
 
 merged = merged[keep]
-
-write.csv(merged,file="Combined_perGene_popGen_Stats.csv",quote = F,row.names = F)
 ```
 
 Next, a shell script was used to match the gene names from either human or mouse to the rheMac8 ensGeneID. The script is called `match_orthos.sh` and relies on a biomart output of all the rheMac8 geneIDs with the human/mouse ortholog gene name.
