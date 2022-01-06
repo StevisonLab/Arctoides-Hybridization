@@ -51,4 +51,4 @@ See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/bl
 
 ## Candidate Loci for genital development and known mutants
 
-Under development.
+See readme page [here](https://github.com/StevisonLab/Arctoides-Hybridization/blob/main/Genital%20Candidate%20Gene%20Analysis.md).
