@@ -9,19 +9,19 @@ library(dplyr)
 taylor=read.csv(file="Genital_Gene_Candidate_List.csv")
 
 #HPO lists
-HPO811=read.csv(file="genes_for_HP_0000811.csv")
-HPO10461=read.csv(file="genes_for_HP_0010461.csv")
-HPO10460=read.csv(file="genes_for_HP_0010460.csv")
-HPO812=read.csv(file="genes_for_HP_0000812.csv")
-HPO1827=read.csv(file="genes_for_HP_0001827.csv")
-HPO12244=read.csv(file="genes_for_HP_0012244.csv")
-HPO3252=read.csv(file="genes_for_HP_0003252.csv")
+HPO811=read.csv(file="updated_candidate_gene_list/genes_for_HP_0000811.csv")
+HPO10461=read.csv(file="updated_candidate_gene_list/genes_for_HP_0010461.csv")
+HPO10460=read.csv(file="updated_candidate_gene_list/genes_for_HP_0010460.csv")
+HPO812=read.csv(file="updated_candidate_gene_list/genes_for_HP_0000812.csv")
+HPO1827=read.csv(file="updated_candidate_gene_list/genes_for_HP_0001827.csv")
+HPO12244=read.csv(file="updated_candidate_gene_list/genes_for_HP_0012244.csv")
+HPO3252=read.csv(file="updated_candidate_gene_list/genes_for_HP_0003252.csv")
 
 #repeat for mp lists
-MP_0002210=read.table(file="MP_0002210_genes.txt")
-MP_0003936=read.table(file="MP_0003936_genes.txt")
-MP_0009198=read.table(file="MP_0009198_genes.txt")
-MP_0009208=read.table(file="MP_0009208_genes.txt")
+MP_0002210=read.table(file="updated_candidate_gene_list/MP_0002210_genes.txt")
+MP_0003936=read.table(file="updated_candidate_gene_list/MP_0003936_genes.txt")
+MP_0009198=read.table(file="updated_candidate_gene_list/MP_0009198_genes.txt")
+MP_0009208=read.table(file="updated_candidate_gene_list/MP_0009208_genes.txt")
 
 #compute data summary to add to plots
 data_summary <- function (datum) {
@@ -64,13 +64,11 @@ keep=c("ensGeneID","scaffold","start.x","end.x","sites","pi_Arctoides.x","pi_Sin
 
 merged = merged[keep]
 
-write.csv(merged,file="Combined_perGene_popGen_Stats.csv",quote = F,row.names = F)
-
 #offline - run match_orthos.sh to get the rheMac8 EnsGeneID for each Human Gene Name
 
 #intersect updated GC list with merged dataset
-hpo_orhtos=read.table(file="hpo_plusTaylor_orthos.txt",header=F)
-mpo_orthos=read.table(file="mpo_orthos.txt",header=F)
+hpo_orhtos=read.table(file="updated_candidate_gene_list/hpo_plusTaylor_orthos.txt",header=F)
+mpo_orthos=read.table(file="updated_candidate_gene_list/mpo_orthos.txt",header=F)
 orthos=rbind(hpo_orhtos,mpo_orthos)
 
 merged$NEW_GC_class=ifelse(merged$ensGeneID %in% orthos$V1,"GCgene","nonGCgene")
@@ -81,7 +79,7 @@ write.csv(merged,file="Combined_perGene_popGen_Stats_updated.csv",quote = F,row.
 
 
 #add info on which candidate gene list each gene is on using ensembl file
-ensembl=read.table(file="Ensembl_gene_list_rhemac8_human_mouse.tsv", sep="\t",header=T,na.strings = "")
+ensembl=read.table(file="updated_candidate_gene_list/Ensembl_gene_list_rhemac8_human_mouse.tsv", sep="\t",header=T,na.strings = "")
 
 #intersect CG list with ensembl table
 ensembl$CGgene=ifelse(ensembl$Gene.stable.ID.version %in% gc_genes,1,0)
@@ -111,8 +109,9 @@ MP_0009208$rheMac8=ifelse(MP_0009208$V1 %in% my_data$Mouse.gene.name,my_data$Gen
 
 taylor$rheMac8=ifelse(taylor$Gene.Name %in% my_data$Human.gene.name,my_data$Gene.stable.ID.version[match(taylor$Gene.Name,my_data$Human.gene.name)],NA)
 
-
 #update Table 2
+length(taylor$rheMac8[!is.na(taylor$rheMac8)])
+
 length(HPO811$rheMac8[!is.na(HPO811$rheMac8)])
 length(HPO10461$rheMac8[!is.na(HPO10461$rheMac8)])
 length(HPO10460$rheMac8[!is.na(HPO10460$rheMac8)])
@@ -155,6 +154,7 @@ mean(my_data$`Arc-dNdS`[my_data$NEW_GC_class=="GCgene"],na.rm=T)
 mean(my_data$`Arc-dNdS`[my_data$NEW_GC_class=="nonGCgene"],na.rm=T)
 #0.1426137
 
+#more values for Table 2 (background counts for dN/dS per list)
 sum(my_data$ensGeneID %in% HPO811$rheMac8,1,0)
 sum(my_data$ensGeneID %in% HPO10461$rheMac8,1,0)
 sum(my_data$ensGeneID %in% HPO10460$rheMac8,1,0)
@@ -172,8 +172,10 @@ sum(my_data$ensGeneID %in% taylor$rheMac8)
 # fdM outliers -----------------------------------------------------------
 #repeat for fdm
 #Note: when doing fdm, a cutoff of only 10 sites was used. Need to filter to get to cutoff of 100!
+merged2=subset(merged,merged$sites>=100)
+
 #clean up dataframe
-my_data=merged[c("ensGeneID","geneID.x","fdM","RecRate","NEW_GC_class")]
+my_data=merged2[c("ensGeneID","geneID.x","fdM","RecRate","NEW_GC_class")]
 my_data<- my_data[complete.cases(my_data),]
 length(my_data$ensGeneID)
 length(my_data$ensGeneID[my_data$NEW_GC_class=="GCgene"])
@@ -195,12 +197,11 @@ my_data <- cbind(my_data,cooksd)
 #get upper outliers
 nrow(my_data[(cooksd >=3*mean(cooksd, na.rm=T)) & # cooksD is high
                (my_data$fdM > my_data$fitted),]) # the value is an upper outlier
-#125
+
 fdm_outliers=my_data$ensGeneID[(cooksd >=3*mean(cooksd, na.rm=T)) & 
                                  (my_data$fdM > my_data$fitted)]
 
 nrow(my_data[(my_data$NEW_GC_class=="nonGCgene"),])
-#0.01325557
 
 #same as below, but neater
 fdm_upper=intersect(fdm_outliers,gc_genes)
@@ -209,8 +210,6 @@ fdm_upper=intersect(fdm_outliers,gc_genes)
 my_data$geneID.x[(cooksd >=3*mean(cooksd, na.rm=T)) & 
                    (my_data$fdM > my_data$fitted) &
                    (my_data$NEW_GC_class=="GCgene") ]
-
-#KDM3B   MPLKIP  PGBD1   RAF1    FAM71F2 POU1F1  WDR48   RF00108
 
 #get lower outliers
 nrow(my_data[(cooksd >=3*mean(cooksd, na.rm=T)) & # cooksD is high
@@ -227,12 +226,9 @@ my_data$geneID.x[(cooksd >=3*mean(cooksd, na.rm=T)) &
                    (my_data$fdM < my_data$fitted) &
                    (my_data$NEW_GC_class=="GCgene") ]
 
-#MANBA   AIRE    MINPP1  PIK3CA  GATA3   SIN3A   TMED10  SNAI2   CYP17A1 IL10    RNF148
-
 mean(my_data$fdM[my_data$NEW_GC_class=="GCgene"],na.rm=T)
-#-0.1636329
 mean(my_data$fdM[my_data$NEW_GC_class=="nonGCgene"],na.rm=T)
-#-0.1574636
+
 
 sum(my_data$ensGeneID %in% HPO811$rheMac8)
 sum(my_data$ensGeneID %in% HPO10461$rheMac8)
@@ -291,7 +287,6 @@ mean(my_data$pi_Arctoides[my_data$NEW_GC_class=="GCgene"],na.rm=T)
 #0.0509636
 mean(my_data$pi_Arctoides[my_data$NEW_GC_class=="nonGCgene"],na.rm=T)
 #0.05472103
-
 
 sum(my_data$ensGeneID %in% HPO811$rheMac8,1,0)
 sum(my_data$ensGeneID %in% HPO10461$rheMac8,1,0)
@@ -544,7 +539,7 @@ outliers=list(dnds_outliers,fdm_upper,fdm_lower,pi_outliers2,fst_arc_sin,dxy_arc
 #make overlap table
 sapply(outliers, function(x) sapply(outliers, function(y) sum(y %in% x)))
 
-#combined=unique(sort(c(as.character(dnds_outliers),fdm_upper,fdm_lower,pi_outliers2,fst_arc_sin,dxy_arc_sin,fst_arc_fas,dxy_arc_fas)))
+combined=unique(sort(c(as.character(dnds_outliers),fdm_upper,fdm_lower,pi_outliers2,fst_arc_sin,dxy_arc_sin,fst_arc_fas,dxy_arc_fas)))
 
 outlier_table=merged[merged$ensGeneID %in% combined,c("ensGeneID","geneID.x","pi_Arctoides.x","fdM","RecRate","Arc-dNdS","Fst_Arctoides_Fascicularis","dxy_Arctoides_Fascicularis","Fst_Arctoides_Sinica","dxy_Arctoides_Sinica","NEW_GC_class")]
 
@@ -595,7 +590,7 @@ write.csv(outlier_table,file="Outliers_Combined.csv",row.names = F,quote = F)
 
 
 #intersect with Phenotype Ontology results and SNPeff results
-outliers=read.csv(file="updated_candidate_gene_list/Outliers_Combined.csv",header=T,stringsAsFactors = T)
+outliers=read.csv(file="Outliers_Combined.csv",header=T,stringsAsFactors = T)
 
 phen_terms=read.csv(file="updated_candidate_gene_list/Phenotype_Ontology_Results.csv",header=T,stringsAsFactors = T)
 
@@ -610,7 +605,7 @@ df=arrange(SNPeff,SNPeff$GeneID,-SNPeff$aa_length)
 SNPeff_trimmed=df[!duplicated(df$GeneId),]
 
 #need to get ensembl gene ID in outlier table
-outliers_merged$GeneId=ifelse(outliers_merged$ensGeneID %in% my_data$Gene.stable.ID.version,my_data$Gene.stable.ID[match(outliers_merged$ensGeneID,my_data$Gene.stable.ID.version)],NA)
+outliers_merged$GeneId=ifelse(outliers_merged$ensGeneID %in% ensembl$Gene.stable.ID.version,ensembl$Gene.stable.ID[match(outliers_merged$ensGeneID,ensembl$Gene.stable.ID.version)],NA)
 
 #merge with outliers
 outliers_final=merge(outliers_merged,SNPeff_trimmed,by="GeneId",all=T)
