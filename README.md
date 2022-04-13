@@ -1,4 +1,4 @@
-# Arctoides-Hybridization
+# _Macaca arctoides_ Genital Evolution Project Details
 This repository details methods and data for the corresponding manuscript detailing hybridization in the _M. arctoides_ genome and the role of hybridization in traits related to genital morphology. 
 
 A snapshot of the pre-release of this repository can be found on Zenodo. Please cite this DOI, the [associated pre-print](https://www.biorxiv.org/content/10.1101/2020.05.18.102251).
