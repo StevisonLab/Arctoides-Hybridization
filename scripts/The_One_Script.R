@@ -597,7 +597,8 @@ phen_terms=read.csv(file="updated_candidate_gene_list/Phenotype_Ontology_Results
 outliers_merged=merge(outliers,phen_terms,by=c("ensGeneID","geneID.x","NEW_GC_class","mouse_outlier","human_outlier"))
 
 #now to intersect SNPeff data
-SNPeff=read.csv(file="../SnpEff.transcripts.csv",header=T,stringsAsFactors = T)
+#SNPeff=read.csv(file="../SnpEff.transcripts.csv",header=T,stringsAsFactors = T)
+SNPeff=read.table(file="../SnpEff/Outlier_Genes.lengths.stats.genes.txt",header=T,stringsAsFactors = T)
 
 #need to remove duplicated gene rows with multiple transcripts
 #will use largest number of amino acids
@@ -608,7 +609,7 @@ SNPeff_trimmed=df[!duplicated(df$GeneId),]
 outliers_merged$GeneId=ifelse(outliers_merged$ensGeneID %in% ensembl$Gene.stable.ID.version,ensembl$Gene.stable.ID[match(outliers_merged$ensGeneID,ensembl$Gene.stable.ID.version)],NA)
 
 #merge with outliers
-outliers_final=merge(outliers_merged,SNPeff_trimmed,by="GeneId",all=T)
+outliers_final=merge(outliers_merged,SNPeff_trimmed,by.x="ensGeneID",by.y="GeneId",all=T)
 write.csv(outliers_final,file="Outliers_Combined_Final.csv",row.names = F,quote = F)
 
 
