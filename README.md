@@ -8,7 +8,7 @@ Please cite this DOI and the [associated pre-print](https://www.biorxiv.org/cont
 
 ## Samples:
 
-This project is based on whole genome sequencing of 13 samples across eight species of macaques. Two were sequenced as part of this project and raw fastq data for eleven additional samples were downloaded from NCBI. Raw read data from two sequenced samples have been deposited in NCBI sequence read archive (PRJNA622565). All samples were processed together through a single genome analysis pipeline.
+This project is based on whole genome sequencing of 13 samples across eight species of macaques. Two were sequenced as part of this project and raw fastq data for eleven additional samples were downloaded from NCBI. Raw read data from two sequenced samples have been deposited in NCBI sequence read archive ([PRJNA622565](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA622565)). All samples were processed together through a single genome analysis pipeline.
 
 | ID | species | species group | Coverage | NCBI Accession | Sex |
 | -- | -- | -- | -- | -- | -- |
