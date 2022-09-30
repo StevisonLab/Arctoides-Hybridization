@@ -3,7 +3,7 @@ This repository details methods and data for the corresponding manuscript detail
 
 A snapshot of the final version of this repository at the time of acceptance of our MS can be found on Zenodo [![DOI](https://zenodo.org/badge/349222702.svg)](https://zenodo.org/badge/latestdoi/349222702).
 
-Please cite this DOI and the [associated pre-print](https://www.biorxiv.org/content/10.1101/2020.05.18.102251). A link to the manuscript at the journal Ecology and Evolution will be added soon!
+Please cite the DOI above as well as the [associated paper](https://onlinelibrary.wiley.com/doi/10.1002/ece3.8897) published in the journal Ecology and Evolution.
 
 
 ## Samples:
