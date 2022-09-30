@@ -4,24 +4,28 @@ library(ggrepel)
 library(interactions)
 library(dplyr)
 
+# Set directory of script to be working directory in Rstudio
+# If this script is run directly on command line the below line should be commented out
+setwd(dirname(rstudioapi::getSourceEditorContext()$path)) 
+
 #read in all the gene lists:
 #taylor's list
-taylor=read.csv(file="Genital_Gene_Candidate_List.csv")
+taylor=read.csv(file="../data/Genital_Gene_Candidate_List.csv") 
 
 #HPO lists
-HPO811=read.csv(file="updated_candidate_gene_list/genes_for_HP_0000811.csv")
-HPO10461=read.csv(file="updated_candidate_gene_list/genes_for_HP_0010461.csv")
-HPO10460=read.csv(file="updated_candidate_gene_list/genes_for_HP_0010460.csv")
-HPO812=read.csv(file="updated_candidate_gene_list/genes_for_HP_0000812.csv")
-HPO1827=read.csv(file="updated_candidate_gene_list/genes_for_HP_0001827.csv")
-HPO12244=read.csv(file="updated_candidate_gene_list/genes_for_HP_0012244.csv")
-HPO3252=read.csv(file="updated_candidate_gene_list/genes_for_HP_0003252.csv")
+HPO811=read.csv(file="../data/genes_for_HP_0000811.csv") 
+HPO10461=read.csv(file="../data/genes_for_HP_0010461.csv")
+HPO10460=read.csv(file="../data/genes_for_HP_0010460.csv")
+HPO812=read.csv(file="../data/genes_for_HP_0000812.csv")
+HPO1827=read.csv(file="../data/genes_for_HP_0001827.csv")
+HPO12244=read.csv(file="../data/genes_for_HP_0012244.csv")
+HPO3252=read.csv(file="../data/genes_for_HP_0003252.csv")
 
 #repeat for mp lists
-MP_0002210=read.table(file="updated_candidate_gene_list/MP_0002210_genes.txt")
-MP_0003936=read.table(file="updated_candidate_gene_list/MP_0003936_genes.txt")
-MP_0009198=read.table(file="updated_candidate_gene_list/MP_0009198_genes.txt")
-MP_0009208=read.table(file="updated_candidate_gene_list/MP_0009208_genes.txt")
+MP_0002210=read.table(file="../data/MP_0002210_genes.txt")
+MP_0003936=read.table(file="../data/MP_0003936_genes.txt")
+MP_0009198=read.table(file="../data/MP_0009198_genes.txt")
+MP_0009208=read.table(file="../data/MP_0009208_genes.txt")
 
 #compute data summary to add to plots
 data_summary <- function (datum) {
@@ -32,12 +36,12 @@ data_summary <- function (datum) {
 }
 
 #read in pop gen data
-div=read.csv(file = "combined.wSilenus.divergence.txt",header=T,stringsAsFactors = T,na.strings = "nan")
-div2=read.csv(file = "combined.wSilenus.Arc_divergence.txt",header=T,stringsAsFactors = T,na.strings = "nan")
-intro=read.csv(file="combined.wSilenus.genes.txt",header=T,stringsAsFactors = T,na.strings = "nan")
-genes=read.table(file="Genital_Gene_Candidate_List.wRec.bed",header=F,stringsAsFactors = T,sep="\t", na.strings =".")
+div=read.csv(file = "../data/combined.wSilenus.divergence.txt",header=T,stringsAsFactors = T,na.strings = "nan") 
+div2=read.csv(file = "../data/combined.wSilenus.Arc_divergence.txt",header=T,stringsAsFactors = T,na.strings = "nan")
+intro=read.csv(file="../data/combined.wSilenus.genes.txt",header=T,stringsAsFactors = T,na.strings = "nan")
+genes=read.table(file="../data/Genital_Gene_Candidate_List.wRec.bed",header=F,stringsAsFactors = T,sep="\t", na.strings =".")
 colnames(genes)=c("scaffold","start","end","ensGeneID","geneID","orientation","GC_class","RecRate")
-dnds=read.table(file="../dNdS/dNdS.results.wSilenus.bed", header=F, stringsAsFactors = T,sep="\t")
+dnds=read.table(file="../data/dNdS.results.wSilenus.bed", header=F, stringsAsFactors = T,sep="\t")
 colnames(dnds)=c("chr","start","end","ensGeneID","GeneID","Arc-dNdS","Sin-dNdS","Fas-dNdS")
 
 #make column for sorting
@@ -67,8 +71,8 @@ merged = merged[keep]
 #offline - run match_orthos.sh to get the rheMac8 EnsGeneID for each Human Gene Name
 
 #intersect updated GC list with merged dataset
-hpo_orhtos=read.table(file="updated_candidate_gene_list/hpo_plusTaylor_orthos.txt",header=F)
-mpo_orthos=read.table(file="updated_candidate_gene_list/mpo_orthos.txt",header=F)
+hpo_orhtos=read.table(file="../data/hpo_plusTaylor_orthos.txt",header=F)
+mpo_orthos=read.table(file="../data/mpo_orthos.txt",header=F)
 orthos=rbind(hpo_orhtos,mpo_orthos)
 
 merged$NEW_GC_class=ifelse(merged$ensGeneID %in% orthos$V1,"GCgene","nonGCgene")
@@ -79,7 +83,7 @@ write.csv(merged,file="Combined_perGene_popGen_Stats_updated.csv",quote = F,row.
 
 
 #add info on which candidate gene list each gene is on using ensembl file
-ensembl=read.table(file="updated_candidate_gene_list/Ensembl_gene_list_rhemac8_human_mouse.tsv", sep="\t",header=T,na.strings = "")
+ensembl=read.table(file="../data/Ensembl_gene_list_rhemac8_human_mouse.tsv", sep="\t",header=T,na.strings = "") 
 
 #intersect CG list with ensembl table
 ensembl$CGgene=ifelse(ensembl$Gene.stable.ID.version %in% gc_genes,1,0)
@@ -592,13 +596,13 @@ write.csv(outlier_table,file="Outliers_Combined.csv",row.names = F,quote = F)
 #intersect with Phenotype Ontology results and SNPeff results
 outliers=read.csv(file="Outliers_Combined.csv",header=T,stringsAsFactors = T)
 
-phen_terms=read.csv(file="updated_candidate_gene_list/Phenotype_Ontology_Results.csv",header=T,stringsAsFactors = T)
+phen_terms=read.csv(file="../data/Phenotype_Ontology_Results.csv",header=T,stringsAsFactors = T) 
 
 outliers_merged=merge(outliers,phen_terms,by=c("ensGeneID","geneID.x","NEW_GC_class","mouse_outlier","human_outlier"))
 
 #now to intersect SNPeff data
 #SNPeff=read.csv(file="../SnpEff.transcripts.csv",header=T,stringsAsFactors = T)
-SNPeff=read.table(file="../SnpEff/Outlier_Genes.lengths.stats.genes.txt",header=T,stringsAsFactors = T)
+SNPeff=read.table(file="../data/Outlier_Genes.lengths.stats.genes.txt",header=T,stringsAsFactors = T) 
 
 #need to remove duplicated gene rows with multiple transcripts
 #will use largest number of amino acids
